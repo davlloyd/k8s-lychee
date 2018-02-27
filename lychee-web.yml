@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lychee-web
+  labels:
+    app: lychee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lychee
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: lychee
+        tier: frontend
+    spec:
+      containers:
+      - image: pks-harbor.syddsc.local/library/lychee:latest
+        name: lychee
+        env:
+        - name: DB_HOST
+          value: lychee-service-mysql
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: lychee-web-config
+              key: db_name
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: lychee-web-config
+              key: db_user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: lychee-pass
+              key: password
+        ports:
+        - containerPort: 80
+          name: lychee
+        volumeMounts:
+        #- name: lychee-pics-persistent-storage
+        #  mountPath: /pictures
+        - name: config-volume
+          mountPath: /data
+      volumes:
+      #- name: lychee-pics-persistent-storage
+      #  persistentVolumeClaim:
+      #    claimName: lychee-pv-claim-photos
+      - name: config-volume
+        configMap:
+          name: lychee-web-config
+          items:
+          - key: config
+            path: config.php

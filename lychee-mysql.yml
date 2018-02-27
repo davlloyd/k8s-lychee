@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lychee-mysql
+  labels:
+    app: lychee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lychee
+      tier: mysql
+  template:
+    metadata:
+      labels:
+        app: lychee
+        tier: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: pks-harbor.syddsc.local/library/mysql:latest
+        args: ["--ignore-db-dir=lost+found"]
+        env:
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: lychee-web-config
+              key: db_name
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: lychee-web-config
+              key: db_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: lychee-pass
+              key: password
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: lychee-pass
+              key: password
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: lychee-sql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: lychee-sql-persistent-storage
+        persistentVolumeClaim:
+          claimName: lychee-pv-claim-db
+
