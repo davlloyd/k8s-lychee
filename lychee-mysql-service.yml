@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: lychee-mysql-service
+  labels:
+    app: lychee
+spec:
+  externalTrafficPolicy: Cluster
+  selector:
+    app: lychee
+    tier: mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
+  sessionAffinity: ClientIP
+  type: LoadBalancer

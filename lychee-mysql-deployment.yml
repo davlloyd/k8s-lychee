@@ -34,18 +34,20 @@ spec:
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: lychee-pass
+              name: lychee-secret
               key: password
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: lychee-pass
+              name: lychee-secret
               key: password
         ports:
         - containerPort: 3306
         volumeMounts:
         - name: lychee-sql-persistent-storage
           mountPath: /var/lib/mysql
+      nodeSelector:
+        node: "node2"
       volumes:
       - name: lychee-sql-persistent-storage
         persistentVolumeClaim:

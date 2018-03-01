@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lychee-config
+  labels:
+    app: lychee
+    name: lychee-config
+data:
+  db_name: lychee
+  db_user: dbuser
+  config: |-
+    <?php
+
+    // Database configuration
+    $dbHost = 'lychee-mysql-service';
+    $dbUser = 'dbuser';
+    $dbPassword = 'Dell#321';
+    $dbName = 'lychee';
+    $dbTablePrefix = '';
+    ?>
+    

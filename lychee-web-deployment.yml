@@ -5,7 +5,7 @@ metadata:
   labels:
     app: lychee
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: lychee
@@ -19,9 +19,13 @@ spec:
       containers:
       - image: pks-harbor.syddsc.local/library/lychee:latest
         name: lychee
+        #command: [ "/bin/sh", "-c", "echo $dbHost = $(DB_HOST) > /config/config.php" ]
+        #command: [ "/bin/sh", "-c", "echo $dbName = $(DB_NAME) >> /config/config.php" ]
+        #command: [ "/bin/sh", "-c", "echo $dbUser = $(DB_USER) >> /config/config.php" ]
+        #command: [ "/bin/sh", "-c", "echo $dbPassword = $(DB_PASSWORD) >> /config/config.php" ]
         env:
         - name: DB_HOST
-          value: lychee-service-mysql
+          value: lychee-mysql-service
         - name: DB_NAME
           valueFrom:
             configMapKeyRef:
@@ -35,21 +39,28 @@ spec:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: lychee-pass
+              name: lychee-secret
               key: password
         ports:
         - containerPort: 80
           name: lychee
         volumeMounts:
-        #- name: lychee-pics-persistent-storage
-        #  mountPath: /pictures
-        - name: config-volume
-          mountPath: /data
+        - name: lychee-volume-photos
+          mountPath: /pictures
+        - name: lychee-volume-config
+          mountPath: /config
+        #- name: config-file
+        #  mountPath: /config/lychee
+      nodeSelector:
+        node: "node1"
       volumes:
-      #- name: lychee-pics-persistent-storage
-      #  persistentVolumeClaim:
-      #    claimName: lychee-pv-claim-photos
-      - name: config-volume
+      - name: lychee-volume-photos
+        persistentVolumeClaim:
+          claimName: lychee-pv-claim-photos
+      - name: lychee-volume-config
+        persistentVolumeClaim:
+          claimName: lychee-pv-claim-config
+      - name: config-file
         configMap:
           name: lychee-web-config
           items:
