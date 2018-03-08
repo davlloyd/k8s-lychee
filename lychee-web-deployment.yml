@@ -5,7 +5,7 @@ metadata:
   labels:
     app: lychee
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: lychee
@@ -25,12 +25,12 @@ spec:
         - name: DB_NAME
           valueFrom:
             configMapKeyRef:
-              name: lychee-web-config
+              name: lychee-config
               key: db_name
         - name: DB_USER
           valueFrom:
             configMapKeyRef:
-              name: lychee-web-config
+              name: lychee-config
               key: db_user
         - name: DB_PASSWORD
           valueFrom:
@@ -45,8 +45,12 @@ spec:
           mountPath: /pictures
         - name: lychee-volume-config
           mountPath: /config
-        #- name: config-file
-        #  mountPath: /config/lychee
+        - name: config-file
+          mountPath: /config/lychee/config.php
+          subPath: config.php
+        - name: config-file
+          mountPath: /config/lychee/user.ini
+          subPath: user.ini
       nodeSelector:
         node: "node1"
       volumes:
@@ -58,7 +62,5 @@ spec:
           claimName: lychee-pv-claim-config
       - name: config-file
         configMap:
-          name: lychee-web-config
-          items:
-          - key: config
-            path: config.php
+          name: lychee-config
+

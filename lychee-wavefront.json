@@ -9,7 +9,7 @@
   "url": "wwko2018-pks",
   "displayDescription": false,
   "displaySectionTableOfContents": true,
-  "displayQueryParameters": false,
+  "displayQueryParameters": true,
   "chartTitleScalar": 0,
   "chartTitleColor": null,
   "chartTitleBgColor": null,
@@ -938,13 +938,24 @@
               "name": "Lychee Chatter",
               "sources": [
                 {
-                  "name": "Source",
+                  "name": "inbound",
+                  "query": "rate(ts(\"heapster.pod.network.rx\", cluster=${cluster} and label.app=lychee))",
+                  "disabled": null,
+                  "scatterPlotSource": "Y",
+                  "querybuilderSerialization": null,
+                  "querybuilderEnabled": false,
+                  "secondaryAxis": null,
+                  "sourceDescription": "",
+                  "sourceColor": null
+                },
+                {
+                  "name": "outbound",
                   "query": "rate(ts(\"heapster.pod.network.tx\", cluster=${cluster} and label.app=lychee))",
                   "disabled": null,
                   "scatterPlotSource": "Y",
                   "querybuilderSerialization": null,
                   "querybuilderEnabled": false,
-                  "secondaryAxis": false,
+                  "secondaryAxis": null,
                   "sourceDescription": "",
                   "sourceColor": null
                 }
@@ -1024,22 +1035,22 @@
               "sources": [
                 {
                   "name": "New Query",
-                  "query": "count(ts((heapster.pod_container.cpu.limit),cluster=${cluster} and label.app=lychee and label.tier=frontend))",
+                  "query": "count(lag(30s,ts(\"heapster.pod.memory.usage\", cluster=${cluster} and label.app=lychee and label.tier=frontend)))",
                   "disabled": null,
                   "scatterPlotSource": "Y",
                   "querybuilderSerialization": null,
                   "querybuilderEnabled": false,
-                  "secondaryAxis": false,
+                  "secondaryAxis": null,
                   "sourceDescription": "",
                   "sourceColor": null
                 }
               ],
               "units": "",
-              "base": 1,
+              "base": 0,
               "noDefaultEvents": true,
               "interpolatePoints": false,
               "includeObsoleteMetrics": false,
-              "description": "",
+              "description": null,
               "chartSettings": {
                 "type": "sparkline",
                 "max": null,
@@ -1054,7 +1065,7 @@
                 "showRawValues": null,
                 "autoColumnTags": false,
                 "columnTags": null,
-                "tagMode": "all",
+                "tagMode": "top",
                 "numTags": 4,
                 "customTags": [],
                 "groupBySource": null,
@@ -1071,11 +1082,10 @@
                 "fixedLegendUseRawStats": false,
                 "fixedLegendPosition": "RIGHT",
                 "fixedLegendDisplayStats": [
-                  "CURRENT",
-                  "MAX"
+                  "CURRENT"
                 ],
                 "fixedLegendFilterSort": "TOP",
-                "fixedLegendFilterLimit": 1,
+                "fixedLegendFilterLimit": 5,
                 "fixedLegendFilterField": "CURRENT",
                 "fixedLegendHideLabel": null,
                 "xMax": null,
@@ -1086,7 +1096,7 @@
                 "markdownContent": null,
                 "plainMarkdownContent": null,
                 "sparklineDisplayValueType": "VALUE",
-                "sparklineDisplayColor": "",
+                "sparklineDisplayColor": "rgba(255,255,255,1)",
                 "sparklineDisplayVerticalPosition": null,
                 "sparklineDisplayHorizontalPosition": "MIDDLE",
                 "sparklineDisplayFontSize": "100",
@@ -1094,10 +1104,10 @@
                 "sparklineDisplayPostfix": null,
                 "sparklineSize": "BOTTOM",
                 "sparklineLineColor": "rgba(127,39,221,0.8)",
-                "sparklineFillColor": "rgba(56,160,244,1)",
+                "sparklineFillColor": "rgba(68,14,98,0.498039)",
                 "sparklineValueColorMapColors": [
-                  "rgba(0,179,202,0.8)",
-                  "rgba(214,186,42,1)",
+                  "rgba(56,160,244,1)",
+                  "rgba(255,224,61,0.498039)",
                   "rgba(211,92,36,1)",
                   "rgba(60,143,150,1)"
                 ],
@@ -1112,7 +1122,7 @@
                 "sparklineValueTextMapText": null,
                 "sparklineValueTextMapThresholds": null
               },
-              "summarization": "MEDIAN"
+              "summarization": "MAX"
             }
           ],
           "heightFactor": 100
@@ -1129,10 +1139,10 @@
               "sources": [
                 {
                   "name": "New Query",
-                  "query": "ts(mysql.queries)",
+                  "query": "ts(mysql.bytes.sent)",
                   "disabled": null,
                   "scatterPlotSource": "Y",
-                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(mysql.queries)\",\"filters\":[[],\"and\"],\"functions\":[]}",
+                  "querybuilderSerialization": "{\"_v\":1,\"metric\":\"ts(mysql.bytes.sent)\",\"filters\":[[],\"and\"],\"functions\":[]}",
                   "querybuilderEnabled": true,
                   "secondaryAxis": false,
                   "sourceDescription": "",

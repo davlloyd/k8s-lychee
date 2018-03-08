@@ -24,12 +24,12 @@ spec:
         - name: MYSQL_DATABASE
           valueFrom:
             configMapKeyRef:
-              name: lychee-web-config
+              name: lychee-config
               key: db_name
         - name: MYSQL_USER
           valueFrom:
             configMapKeyRef:
-              name: lychee-web-config
+              name: lychee-config
               key: db_user
         - name: MYSQL_PASSWORD
           valueFrom:

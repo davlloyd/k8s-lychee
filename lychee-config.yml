@@ -8,7 +8,13 @@ metadata:
 data:
   db_name: lychee
   db_user: dbuser
-  config: |-
+  user.ini: |
+    max_execution_time = 200
+    post_max_size = 200M
+    upload_max_size = 200M
+    upload_max_filesize = 20M
+    max_file_uploads = 200
+  config.php: |
     <?php
 
     // Database configuration
@@ -17,5 +23,6 @@ data:
     $dbPassword = 'Dell#321';
     $dbName = 'lychee';
     $dbTablePrefix = '';
+    
     ?>
     
