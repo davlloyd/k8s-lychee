@@ -18,10 +18,10 @@ data:
     <?php
 
     // Database configuration
-    $dbHost = 'lychee-mysql-service';
-    $dbUser = 'dbuser';
-    $dbPassword = 'Dell#321';
-    $dbName = 'lychee';
+    $dbHost = '$DB_HOST';
+    $dbUser = '$DB_USER';
+    $dbPassword = '$DB_PASSWORD';
+    $dbName = '$DB_NAME';
     $dbTablePrefix = '';
     
     ?>
