@@ -56,11 +56,10 @@ chown -R root:root \
 
 chmod -R 777 /config /photos
 
-# Get nginx service started as installs stopped
-service nginx start
-
 # Get PHP started as installs stopped
 service php7.0-fpm start
 
+# Get nginx service started as installs stopped
+service nginx start
 
 exec "$@"

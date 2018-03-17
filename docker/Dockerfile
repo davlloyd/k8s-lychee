@@ -31,7 +31,8 @@ RUN apt-get -yq install git nginx imagemagick curl mysql-client \
 COPY files/lychee-webapp /etc/nginx/sites-available
 RUN rm /etc/nginx/sites-enabled/default && \
     rm /etc/nginx/sites-available/default && \
-    ln -s /etc/nginx/sites-available/lychee-webapp /etc/nginx/sites-enabled
+    ln -s /etc/nginx/sites-available/lychee-webapp /etc/nginx/sites-enabled && \
+    echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Configure PHP
 RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini
