@@ -19,6 +19,7 @@ spec:
       containers:
       - name: mysql
         image: pks-harbor.syddsc.local/library/mysql:latest
+#        image: mysql:latest
         args: ["--ignore-db-dir=lost+found"]
         env:
         - name: MYSQL_DATABASE

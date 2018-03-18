@@ -24,7 +24,7 @@ LABEL EnvVar1="DB_HOST=the mysql database host name or IP address"
 LABEL EnvVar2="DB_NAME=the mysql database name to connect to or to be created"
 LABEL EnvVar3="DB_USER=the mysql account to connect with, needs database create access if database not already present"
 LABEL EnvVar4="DB_PASSWORD=the mysql accounts password"
-LABEL EnvVar5="DB_PREFIX=a string prefix to put on table names"
+LABEL EnvVar5="DB_PREFIX=a string prefix to put on table names (optional)"
 
 
 # Environment variables for connecting to MySQL Source
@@ -53,10 +53,10 @@ RUN rm /etc/nginx/sites-enabled/default && \
     echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Configure PHP
-RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini
-RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.0/fpm/php.ini
-RUN sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 1G/g" /etc/php/7.0/fpm/php.ini
-RUN sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 1G/g" /etc/php/7.0/fpm/php.ini
+RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini && \
+    sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.0/fpm/php.ini && \
+    sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 1G/g" /etc/php/7.0/fpm/php.ini && \
+    sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 1G/g" /etc/php/7.0/fpm/php.ini
 
 # Get Lychee code
 RUN mkdir -p /usr/share/webapps && \

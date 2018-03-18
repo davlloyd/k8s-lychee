@@ -1,4 +1,4 @@
-# k8s-lychee
+# Lychee's Journey To Cloud Native
 
 ## Overview
 Kubernetes demo using Tobias Reich's pretty Lychee photo app  [Lychee Site](https://github.com/electerious/Lychee)
@@ -9,13 +9,13 @@ At the conclusion of the exercise the end state needs to be supportative of a tr
 
 This process is occuring in mulitple phases as listed below:
 
-* Step 1: Service repackaging, this will repackage the application into a container image and provide the seperation of the frontend (web) and backend (database) services. It will also be supportive of external definition of configuration services troug supporting configuration through environment variables as requird
+* Step 1: Service repackaging, the repackaging of the application into a container image and provide the seperation of the frontend (web) and backend (database) services. It will also be supportive of external definition of configuration services troug supporting configuration through environment variables as requird. Package is contained in the /docker directory
 
 * Step 2: Create manifests to create the service within a Kubernetes environment (focused on Pivotal Container Services / PKS) to support the hosting of the service, provide scaling, update, resilience and configuration management
 
-* Step 3: Identify constraints in current application architecture (current stage)
+* Step 3: Identify constraints in current application architecture
 
-* Step 4: Application refactoring for web front end to cater for changes to support scale-out (possible S3 support inclusion)
+* Step 4: Application refactoring for web front end to cater for changes to support scale-out. This will require the moving of the photo image repository from a local based storage model
 
 * Step 5: Applicatioom refactoring to support scale-out data services as alternate to MySQL
 
@@ -38,6 +38,6 @@ The various components have been broken up to support the hosting of Lychee in K
 ![Lychee Kubernetes Manifests](/images/lychee-k8s-structure.png)
 
 
-When applying manifests apply in a bottom up order with '''kubectl create -f <filename>''' for inital creation and with '''kubectl apply -f <filename>''' for any updates to be applied such as for instance changes
+When applying manifests apply in a bottom up order with *kubectl create -f <filename>* for inital creation and with _kubectl apply -f <filename>_ for any updates to be applied such as for instance changes
 
 **ConfigMap/Secret -> PVCs -> Database Deployment -> Database Service -> Web Deployment -> Web Service**
