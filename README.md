@@ -38,6 +38,6 @@ The various components have been broken up to support the hosting of Lychee in K
 ![Lychee Kubernetes Manifests](/images/lychee-k8s-structure.png)
 
 
-When applying manifests apply in a bottom up order with ''' kubectl create -f <filename> ''' for inital creation and with ''' kubectl apply -f <filename> ''' for any updates to be applied such as for instance changes
+When applying manifests apply in a bottom up order with '''kubectl create -f <filename>''' for inital creation and with '''kubectl apply -f <filename>''' for any updates to be applied such as for instance changes
 
 **ConfigMap/Secret -> PVCs -> Database Deployment -> Database Service -> Web Deployment -> Web Service**
