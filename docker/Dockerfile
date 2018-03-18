@@ -15,7 +15,25 @@
 
 # Using Ubuntu as base image initalluy, will look to shift to PhotonOS
 FROM ubuntu:16.04
-MAINTAINER David Lloyd <davidlloyd0@gmail.com>
+LABEL maintainer="David Lloyd <davidlloyd0@gmail.com>"
+LABEL version="1.0"
+LABEL description="Lychee Photo Album Application Web Service provides a web frontend \
+to the web service source at https://lychee.electerious.com. It also needs a MySQL instance \
+for operations as defined by the supported environment variables"
+LABEL EnvVar1="DB_HOST=the mysql database host name or IP address"
+LABEL EnvVar2="DB_NAME=the mysql database name to connect to or to be created"
+LABEL EnvVar3="DB_USER=the mysql account to connect with, needs database create access if database not already present"
+LABEL EnvVar4="DB_PASSWORD=the mysql accounts password"
+LABEL EnvVar5="DB_PREFIX=a string prefix to put on table names"
+
+
+# Environment variables for connecting to MySQL Source
+ENV DB_HOST dbhost
+ENV DB_NAME lychee
+ENV DB_USER dbuser
+ENV DB_PASSWORD password
+ENV DB_PREFIX ""
+
 
 # Get the Core installed
 RUN apt-get update
@@ -55,4 +73,4 @@ ENTRYPOINT [ "/entry_point.sh" ]
 EXPOSE 80
 VOLUME /config /photos
 
-CMD [ "bash"]
+#CMD [ "bash"]

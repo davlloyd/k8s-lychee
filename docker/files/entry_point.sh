@@ -44,7 +44,7 @@ done
     echo \$dbUser = \'$DB_USER\'\; >> /config/lychee/config.php
     echo \$dbPassword = \'$DB_PASSWORD\'\; >> /config/lychee/config.php
     echo \$dbName = \'$DB_NAME\'\; >> /config/lychee/config.php
-    echo \$dbTablePrefix = \'\'\; >> /config/lychee/config.php
+    echo \$dbTablePrefix = \'$DB_PREFIX\'\; >> /config/lychee/config.php
     echo "?>" >> /config/lychee/config.php
 
 # permissions
