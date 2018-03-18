@@ -34,6 +34,10 @@ The various components have been broken up to support the hosting of Lychee in K
 * Pods are pinned via labelling to particular nodes due to the PVS support of acceess type *ReadWriteOnce* wic only allows one node to ave bot read and write access to PersistantVolume at a time (e.g. Photo storage volume)
 * Storage Class needs to be created and defined in PVCs to reflect storage capability required
 
-When applyying manifests apply in a bottom up order with ''' kubectl create -f <filename> ''' for inital creation and with ''' kubectl apply -f <filename> ''' for any updates to be applied such as for instance changes
+
+![Lychee Kubernetes Manifests](/images/lychee-k8s-structure.png)
+
+
+When applying manifests apply in a bottom up order with ''' kubectl create -f <filename> ''' for inital creation and with ''' kubectl apply -f <filename> ''' for any updates to be applied such as for instance changes
 
 **ConfigMap/Secret -> PVCs -> Database Deployment -> Database Service -> Web Deployment -> Web Service**
