@@ -38,13 +38,13 @@ done
 
 # Create Lychee database access config file
 [ ! -e /config/lychee/config.php ] && \
-    echo "<?php" > /config/lychee/config.php
-    echo "// Database configuration" >> /config/lychee/config.php
-    echo \$dbHost = \'$DB_HOST\'\; >> /config/lychee/config.php
-    echo \$dbUser = \'$DB_USER\'\; >> /config/lychee/config.php
-    echo \$dbPassword = \'$DB_PASSWORD\'\; >> /config/lychee/config.php
-    echo \$dbName = \'$DB_NAME\'\; >> /config/lychee/config.php
-    echo \$dbTablePrefix = \'$DB_PREFIX\'\; >> /config/lychee/config.php
+    echo "<?php" > /config/lychee/config.php && \
+    echo "// Database configuration" >> /config/lychee/config.php && \
+    echo \$dbHost = \'$DB_HOST\'\; >> /config/lychee/config.php && \
+    echo \$dbUser = \'$DB_USER\'\; >> /config/lychee/config.php && \
+    echo \$dbPassword = \'$DB_PASSWORD\'\; >> /config/lychee/config.php && \
+    echo \$dbName = \'$DB_NAME\'\; >> /config/lychee/config.php && \
+    echo \$dbTablePrefix = \'$DB_PREFIX\'\; >> /config/lychee/config.php && \
     echo "?>" >> /config/lychee/config.php
 
 # permissions
