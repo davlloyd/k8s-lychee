@@ -63,6 +63,7 @@ def setClusterConfig(clusterName):
 def getPodList(cluster):
     """ Get the list of Pods with matching labels and check if config exists """
 
+    global change
     config.load_kube_config()
     v1 = client.CoreV1Api()
     filter = "app={}".format(applabel)
@@ -89,6 +90,7 @@ def getPodList(cluster):
 
 def deleteRemovedPodConf():    
     """ Delete conf files for pods that no longer exist """
+    global change
     for f in os.listdir(telegrafConfig):
         if("mysql" in f or "nginx" in f):
             if not f[6:-5] in pods:
@@ -101,7 +103,8 @@ def restartTelegraf():
         stdout=subprocess.PIPE, shell=False, stderr=subprocess.DEVNULL)
     (output) = p.communicate()
 
-    if (p.wait() == 0):    
+    if (p.wait() == 0): 
+        print(output)   
         return True
     else:
         print ("Error: %s", output)
