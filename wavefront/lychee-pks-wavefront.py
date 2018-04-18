@@ -18,7 +18,7 @@ dbtier = 'mysql'
 clusters = []
 pods = []
 telegrafConfig = '/Users/lloydd/Documents/playpen/telegraf.d/'
-
+change = False
 
 def setPKSLogin():
     """ Login into PKS """
@@ -39,7 +39,7 @@ def getClusterList():
     p = subprocess.Popen(['pks', 'clusters', '--json'], stdout=subprocess.PIPE)
     (output, err) = p.communicate()
     if (p.wait() == 0):
-        l = json.loads(output)
+        l = json.loads(output.decode('utf-8'))
         for item in l: 
             clusters.append(item['name'])
         return True
@@ -75,10 +75,12 @@ def getPodList(cluster):
         if(i.metadata.labels['tier'] == "frontend"):
             filename = "{}nginx-{}.conf".format(telegrafConfig, pod_id)
             if(not os.path.isfile(filename)):
+                change=True
                 createNginxDef(cluster, i.metadata.namespace, filename, i.status.pod_ip)
         else:
             filename = "{}mysql-{}.conf".format(telegrafConfig, pod_id)
             if(not os.path.isfile(filename)):
+                change=True
                 for envVar in i.spec.containers[0].env:
                     if (envVar.name == "MYSQL_ROOT_PASSWORD"):
                         secret = v1.read_namespaced_secret(envVar.value_from.secret_key_ref.name, i.metadata.namespace)
@@ -90,8 +92,20 @@ def deleteRemovedPodConf():
     for f in os.listdir(telegrafConfig):
         if("mysql" in f or "nginx" in f):
             if not f[6:-5] in pods:
+                change=True
                 os.remove("{}{}".format(telegrafConfig, f))
 
+def restartTelegraf():
+    """ Restart the telegraf service to load changes """
+    p = subprocess.Popen(['service', 'telegraf', 'restart'], 
+        stdout=subprocess.PIPE, shell=False, stderr=subprocess.DEVNULL)
+    (output) = p.communicate()
+
+    if (p.wait() == 0):    
+        return True
+    else:
+        print ("Error: %s", output)
+        return False    
 
 def createNginxDef(cluster, namespace, filename, ipAddress):
     """ Create MySql config file for telegraf """
@@ -143,6 +157,7 @@ if(os.path.isdir(telegrafConfig)):
             setClusterConfig(cluster)
             getPodList(cluster)
         deleteRemovedPodConf()
+
 else:
     print("Error: Supplied Telegraf config path '{}' does not exist".format(telegrafConfig))
     
