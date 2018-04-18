@@ -157,6 +157,8 @@ if(os.path.isdir(telegrafConfig)):
             setClusterConfig(cluster)
             getPodList(cluster)
         deleteRemovedPodConf()
+        if change:
+            restartTelegraf()
 
 else:
     print("Error: Supplied Telegraf config path '{}' does not exist".format(telegrafConfig))
