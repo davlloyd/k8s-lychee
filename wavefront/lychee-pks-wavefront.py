@@ -9,6 +9,9 @@ Assumes PKS cli command tools are in path
 import json, os, base64, subprocess
 from kubernetes import client, config
 
+# Need to set these up to be fed in by command lien or environment variables so 
+# can run within container
+
 pksapi = 'pks-api.syddsc.local'
 pksuser = 'david'
 pkspassword = 'password'
@@ -17,7 +20,7 @@ webtier = 'frontend'
 dbtier = 'mysql'
 clusters = []
 pods = []
-telegrafConfig = '/Users/lloydd/Documents/playpen/telegraf.d/'
+telegrafConfig = '/etc/telegraf/telegraf.d/'
 change = False
 
 def setPKSLogin():
@@ -49,6 +52,10 @@ def getClusterList():
 
 def setClusterConfig(clusterName):
     """ Set kube config to supplied cluster """
+
+    # Need to update this to query if context already exists and use switch context instead
+    # this will prevent the continuing creation of service accounts on each get-credentials 
+    #command
 
     p = subprocess.Popen(['pks', 'get-credentials', clusterName], 
         stdout=subprocess.PIPE, shell=False, stderr=subprocess.DEVNULL)
