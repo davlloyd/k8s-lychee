@@ -7,7 +7,7 @@ metadata:
     name: lychee-config
 data:
   db_name: lychee
-  db_user: dbuser
+  db_user: lychee
   user.ini: |
     max_execution_time = 200
     post_max_size = 200M
@@ -18,10 +18,10 @@ data:
     <?php
 
     // Database configuration
-    $dbHost = '$DB_HOST';
-    $dbUser = '$DB_USER';
-    $dbPassword = '$DB_PASSWORD';
-    $dbName = '$DB_NAME';
+    $dbHost = 'lychee-mysql-service';
+    $dbUser = 'lychee';
+    $dbPassword = 'password';
+    $dbName = 'lychee';
     $dbTablePrefix = '';
     
     ?>

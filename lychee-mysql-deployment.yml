@@ -47,8 +47,8 @@ spec:
         volumeMounts:
         - name: lychee-sql-persistent-storage
           mountPath: /var/lib/mysql
-      nodeSelector:
-        node: "node2"
+#      nodeSelector:
+#        node: "node2"
       volumes:
       - name: lychee-sql-persistent-storage
         persistentVolumeClaim:

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: lychee
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: lychee
@@ -20,6 +20,7 @@ spec:
       - name: lychee
         image: pks-harbor.syddsc.local/library/lychee-web:latest
 #        - image: davlloyd/lychee-web:latest
+        imagePullPolicy: Always
         env:
         - name: DB_HOST
           value: lychee-mysql-service
@@ -44,11 +45,11 @@ spec:
         volumeMounts:
         - name: lychee-volume-photos
           mountPath: /pictures
-        - name: lychee-volume-config
-          mountPath: /config
-#        - name: config-file
-#          mountPath: /config/lychee/config.php
-#          subPath: config.php
+        #- name: lychee-volume-config
+        #  mountPath: /config
+        - name: config-file
+          mountPath: /config/lychee/config.php
+          subPath: config.php
         - name: config-file
           mountPath: /config/lychee/user.ini
           subPath: user.ini

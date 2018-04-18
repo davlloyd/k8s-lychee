@@ -40,7 +40,7 @@ RUN apt-get update
 
 # Lychee requires the following php extensions Installed (session, exif, mbstring, gd, mysqli, json, zip)
 # Where lychee defaults to consuming local mysql services no mysql server instance will be located in this image
-RUN apt-get -yq install git nginx imagemagick curl mysql-client \
+RUN apt-get -yq install git nginx imagemagick curl mysql-client vim \
                         php7.0-fpm php7.0-common php7.0-cli php7.0-mysqlnd \
                         php7.0-mysqli php-curl php7.0-json php7.0-zip php7.0-exif \
                         php7.0-mbstring php7.0-gd php7.0-exif
@@ -50,7 +50,7 @@ COPY files/lychee-webapp /etc/nginx/sites-available
 RUN rm /etc/nginx/sites-enabled/default && \
     rm /etc/nginx/sites-available/default && \
     ln -s /etc/nginx/sites-available/lychee-webapp /etc/nginx/sites-enabled && \
-    echo "daemon off;" >> /etc/nginx/nginx.conf
+    echo "daemon off;" >> /etc/nginx/nginx.conf 
 
 # Configure PHP
 RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini && \
@@ -61,7 +61,7 @@ RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/
 # Get Lychee code
 RUN mkdir -p /usr/share/webapps && \
     cd /usr/share/webapps && \
-    git clone https://github.com/electerious/Lychee.git && \
+    git clone https://github.com/davlloyd/Lychee.git && \
     mv /usr/share/webapps/Lychee /usr/share/webapps/lychee
 
 # Set entry point
@@ -73,4 +73,4 @@ ENTRYPOINT [ "/entry_point.sh" ]
 EXPOSE 80
 VOLUME /config /photos
 
-#CMD [ "bash"]
+CMD [ "bash"]
