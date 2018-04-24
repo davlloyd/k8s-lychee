@@ -5,7 +5,7 @@ metadata:
   labels:
     app: lychee
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: lychee
@@ -44,7 +44,7 @@ spec:
           name: lychee
         volumeMounts:
         - name: lychee-volume-photos
-          mountPath: /pictures
+          mountPath: /photos
         #- name: lychee-volume-config
         #  mountPath: /config
         - name: config-file
@@ -53,15 +53,18 @@ spec:
         - name: config-file
           mountPath: /config/lychee/user.ini
           subPath: user.ini
-      nodeSelector:
-        node: "node1"
+      #nodeSelector:
+      #  node: "node1"
       volumes:
+      #- name: lychee-volume-photos
+      #  persistentVolumeClaim:
+      #    claimName: lychee-pv-claim-photos
+      #- name: lychee-volume-config
+      #  persistentVolumeClaim:
+      #    claimName: lychee-pv-claim-config
       - name: lychee-volume-photos
         persistentVolumeClaim:
-          claimName: lychee-pv-claim-photos
-      - name: lychee-volume-config
-        persistentVolumeClaim:
-          claimName: lychee-pv-claim-config
+          claimName: lychee-pv-photo-nfs      
       - name: config-file
         configMap:
           name: lychee-config

@@ -4,6 +4,7 @@ metadata:
   name: lychee-mysql-service
   labels:
     app: lychee
+    tier: mysql
 spec:
   externalTrafficPolicy: Cluster
   selector:

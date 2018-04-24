@@ -4,6 +4,7 @@ metadata:
   name: lychee-web-service
   labels:
     app: lychee
+    tier: frontend
 spec:
   externalTrafficPolicy: Cluster
   selector:

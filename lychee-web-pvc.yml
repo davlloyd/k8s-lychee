@@ -13,7 +13,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 100Mi
   storageClassName: ci-storage
 
 ---
@@ -31,6 +31,22 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Gi
+      storage: 20Gi
   storageClassName: ci-storage
 
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lychee-pv-claim-photos
+  labels:
+    app: lychee
+    tier: frontend
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: ""

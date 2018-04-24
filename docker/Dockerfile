@@ -16,7 +16,7 @@
 # Using Ubuntu as base image initalluy, will look to shift to PhotonOS
 FROM ubuntu:16.04
 LABEL maintainer="David Lloyd <davidlloyd0@gmail.com>"
-LABEL version="1.0"
+LABEL version="1.1"
 LABEL description="Lychee Photo Album Application Web Service provides a web frontend \
 to the web service source at https://lychee.electerious.com. It also needs a MySQL instance \
 for operations as defined by the supported environment variables"
@@ -40,7 +40,7 @@ RUN apt-get update
 
 # Lychee requires the following php extensions Installed (session, exif, mbstring, gd, mysqli, json, zip)
 # Where lychee defaults to consuming local mysql services no mysql server instance will be located in this image
-RUN apt-get -yq install git nginx imagemagick curl mysql-client vim \
+RUN apt-get -yq install git nginx imagemagick curl mysql-client vim nfs-common \
                         php7.0-fpm php7.0-common php7.0-cli php7.0-mysqlnd \
                         php7.0-mysqli php-curl php7.0-json php7.0-zip php7.0-exif \
                         php7.0-mbstring php7.0-gd php7.0-exif
@@ -50,13 +50,14 @@ COPY files/lychee-webapp /etc/nginx/sites-available
 RUN rm /etc/nginx/sites-enabled/default && \
     rm /etc/nginx/sites-available/default && \
     ln -s /etc/nginx/sites-available/lychee-webapp /etc/nginx/sites-enabled && \
-    echo "daemon off;" >> /etc/nginx/nginx.conf 
+    echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Configure PHP
 RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini && \
     sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.0/fpm/php.ini && \
     sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 1G/g" /etc/php/7.0/fpm/php.ini && \
-    sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 1G/g" /etc/php/7.0/fpm/php.ini
+    sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 1G/g" /etc/php/7.0/fpm/php.ini && \
+    sed -i -e "s/;clear_env = no/clear_env = no/" /etc/php/7.0/fpm/pool.d/www.conf
 
 # Get Lychee code
 RUN mkdir -p /usr/share/webapps && \
