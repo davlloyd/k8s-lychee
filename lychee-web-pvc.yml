@@ -1,52 +1,14 @@
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: lychee-pv-claim-config
-  annotations:
-    volume.beta.kubernetes.io/storage-class: ci-storage
-  labels:
-    app: lychee
-    tier: frontend
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-  storageClassName: ci-storage
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: lychee-pv-claim-photos
-  annotations:
-    volume.beta.kubernetes.io/storage-class: ci-storage
-  labels:
-    app: lychee
-    tier: frontend
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
-  storageClassName: ci-storage
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: lychee-pv-claim-photos
+  name: lychee-pvc-photo
   labels:
     app: lychee
     tier: frontend
 spec:
   accessModes:
     - ReadWriteMany
+  volumeMode: Filesystem
   resources:
     requests:
       storage: 20Gi
-  storageClassName: ""

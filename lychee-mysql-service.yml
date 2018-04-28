@@ -4,12 +4,12 @@ metadata:
   name: lychee-mysql-service
   labels:
     app: lychee
-    tier: mysql
+    tier: db
 spec:
   externalTrafficPolicy: Cluster
   selector:
     app: lychee
-    tier: mysql
+    tier: db
   ports:
   - protocol: TCP
     port: 3306

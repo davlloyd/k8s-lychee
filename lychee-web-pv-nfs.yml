@@ -13,6 +13,6 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: 192.168.187.250
-    path: "/lychee/album"
+    path: "/lychee/album-dev"
     readOnly: false 
 
