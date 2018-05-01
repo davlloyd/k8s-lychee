@@ -6,7 +6,7 @@ metadata:
     app: lychee
     tier: frontend
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: lychee
@@ -63,7 +63,7 @@ spec:
         - name: MONITOR_INTERVAL
           value: 30s     
         - name: CLUSTER_NAME
-          value: development
+          value: production
         - name: NAMESPACE_NAME
           valueFrom:
             fieldRef:

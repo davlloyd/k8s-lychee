@@ -20,7 +20,7 @@ spec:
       containers:
       - name: mysql
         image: pks-harbor.syddsc.local/library/mysql:latest
-#        image: mysql:latest
+        imagePullPolicy: IfNotPresent # local cache IfNotPresent or Never
         args: ["--ignore-db-dir=lost+found"]
         env:
         - name: MYSQL_DATABASE

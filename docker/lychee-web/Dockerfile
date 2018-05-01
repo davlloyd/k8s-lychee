@@ -43,7 +43,8 @@ RUN apt-get update
 RUN apt-get -yq install git nginx imagemagick curl mysql-client vim nfs-common \
                         php7.0-fpm php7.0-common php7.0-cli php7.0-mysqlnd \
                         php7.0-mysqli php-curl php7.0-json php7.0-zip php7.0-exif \
-                        php7.0-mbstring php7.0-gd php7.0-exif
+                        php7.0-mbstring php7.0-gd php7.0-exif php-pear php7.0-dev
+RUN pecl install mongodb
 
 # Activate app in NGINX
 COPY files/lychee-webapp /etc/nginx/sites-available
