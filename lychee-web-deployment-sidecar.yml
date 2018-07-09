@@ -2,15 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lychee-web
+  #Labels used to identify application and function
   labels:
     app: lychee
     tier: frontend
 spec:
-  replicas: 2
+  # number of instances required
+  replicas: 3
   selector:
     matchLabels:
       app: lychee
       tier: frontend
+  # Delay added for rolling updates before assuming operational 
   minReadySeconds: 10
   template:
     metadata:
@@ -19,9 +22,9 @@ spec:
         tier: frontend
     spec:
       containers:
+      # First container provides the web app services
       - name: lychee
         image: pks-harbor.syddsc.local/library/lychee-web:latest
-#        - image: davlloyd/lychee-web:latest
         imagePullPolicy: Always
         env:
         - name: DB_HOST
@@ -43,28 +46,36 @@ spec:
               key: password
         ports:
         - containerPort: 80
-          name: lychee
+          name: lychee-open
+        - containerPort: 443
+          name: lychee-secure
         volumeMounts:
+        # Volume that stores all photo images
         - name: lychee-volume-photos
           mountPath: /photos
+        # Config file for database details
         - name: config-file
           mountPath: /config/lychee/config.php
           subPath: config.php
+        # Config file for user esperience
         - name: config-file
           mountPath: /config/lychee/user.ini
           subPath: user.ini
+      # Sidecar Wavefront monitoring container
       - name: lychee-wavefront
         image: pks-harbor.syddsc.local/library/wavefront-sidecar:latest
         imagePullPolicy: Always
         env:
+        # Cluster name is optional butneeded for centralised proxy
+        - name: CLUSTER_NAME
+          value: development
+        # Services to be monitored
         - name: SERVICES
           value: nginx
         - name: WAVEFRONT_PROXY_HOST
           value: 192.168.192.248
         - name: MONITOR_INTERVAL
           value: 30s     
-        - name: CLUSTER_NAME
-          value: production
         - name: NAMESPACE_NAME
           valueFrom:
             fieldRef:
@@ -84,6 +95,7 @@ spec:
       - name: config-file
         configMap:
           name: lychee-config
+      # Downward APIs used to make labels visibel within container
       - name: podinfo
         downwardAPI:
           items:

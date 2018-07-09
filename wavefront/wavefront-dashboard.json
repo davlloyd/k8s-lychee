@@ -1,0 +1,1098 @@
+{
+    "name": "DSC - Lychee Monitor",
+    "description": "",
+    "eventFilterType": "BYCHART",
+    "eventQuery": "",
+    "defaultTimeWindow": "10m",
+    "url": "wwko2018-pks",
+    "displayDescription": false,
+    "displaySectionTableOfContents": true,
+    "displayQueryParameters": true,
+    "chartTitleScalar": 0,
+    "sections": [
+      {
+        "name": "Dashboard",
+        "rows": [
+          {
+            "charts": [
+              {
+                "name": "Kubernetes",
+                "sources": [
+                  {
+                    "name": "New Query",
+                    "query": "",
+                    "scatterPlotSource": "Y",
+                    "querybuilderSerialization": "{\"_v\":1,\"metric\":\"\",\"filters\":[[],\"and\"],\"functions\":[]}",
+                    "querybuilderEnabled": true,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Units",
+                "base": 1,
+                "noDefaultEvents": true,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "markdown-widget",
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "TOP",
+                  "fixedLegendDisplayStats": [],
+                  "fixedLegendFilterSort": "BOTTOM",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "COUNT",
+                  "plainMarkdownContent": "## Lychee                    ![](https://s3.envato.com/files/134879260/surfer.png) \n"
+                },
+                "summarization": "MEAN"
+              }
+            ],
+            "heightFactor": 100
+          }
+        ]
+      },
+      {
+        "name": "Cluster",
+        "rows": [
+          {
+            "charts": [
+              {
+                "name": "Nodes",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "count(ts(\"heapster.node.memory.usage\", cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": " ",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "sparkline",
+                  "max": 6,
+                  "min": 1,
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": true,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayVerticalPosition": "MIDDLE",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "125",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineLineColor": "rgba(56,160,244,0.91)",
+                  "sparklineFillColor": "rgba(94,155,23,1)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(56,160,244,1)",
+                    "rgba(255,224,61,1)",
+                    "rgba(242,101,34,1)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    10,
+                    100
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "LAST"
+              },
+              {
+                "name": "Namespaces",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "count(ts(\"heapster.ns.memory.usage\", cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": " ",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "sparkline",
+                  "lineType": "linear",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayVerticalPosition": "MIDDLE",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "125",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineFillColor": "rgba(13,166,232,1)",
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MEAN"
+              },
+              {
+                "name": "Pods",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "count(lag(30s,ts(\"heapster.pod.memory.usage\", cluster=${cluster})))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": " ",
+                "base": 0,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "chartSettings": {
+                  "type": "sparkline",
+                  "lineType": "linear",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayVerticalPosition": "MIDDLE",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "125",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineFillColor": "rgba(134,192,66,0.498039)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(92,184,92,1)",
+                    "rgba(255,224,61,1)",
+                    "rgba(0,148,255,0.64)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    0,
+                    1
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "LAST"
+              },
+              {
+                "name": "Pod Containers",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "count(lag(1m,ts(\"heapster.pod_container.uptime\", cluster=${cluster})))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": " ",
+                "base": 0,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "chartSettings": {
+                  "type": "sparkline",
+                  "lineType": "linear",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayVerticalPosition": "MIDDLE",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "125",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineFillColor": "rgba(134,192,66,0.498039)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(92,184,92,1)",
+                    "rgba(255,224,61,1)",
+                    "rgba(0,148,255,0.64)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    0,
+                    1
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MEAN"
+              }
+            ],
+            "heightFactor": 67
+          },
+          {
+            "charts": [
+              {
+                "name": "Average Node Memory Utilisation",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "avg(ts(\"heapster.node.memory.node_utilization\", cluster=${cluster})) * 100",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "%",
+                "base": 0,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "chartSettings": {
+                  "type": "sparkline",
+                  "max": 100,
+                  "min": 0,
+                  "lineType": "linear",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayVerticalPosition": "MIDDLE",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "125",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineFillColor": "rgba(134,192,66,0.498039)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(92,184,92,1)",
+                    "rgba(255,224,61,1)",
+                    "rgba(0,148,255,0.64)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    0,
+                    1
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MEAN"
+              },
+              {
+                "name": "Average Node CPU Utilisation",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "avg(ts(\"heapster.node.cpu.node_utilization\", cluster=${cluster})) * 100",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": " %",
+                "base": 0,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "chartSettings": {
+                  "type": "sparkline",
+                  "max": 100,
+                  "min": 0,
+                  "lineType": "linear",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "TOP",
+                  "fixedLegendDisplayStats": [],
+                  "fixedLegendFilterSort": "BOTTOM",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "COUNT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayVerticalPosition": "MIDDLE",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "125",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineFillColor": "rgba(134,192,66,0.498039)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(92,184,92,1)",
+                    "rgba(255,224,61,1)",
+                    "rgba(0,148,255,0.64)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    0,
+                    1
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MEAN"
+              }
+            ],
+            "heightFactor": 100
+          }
+        ]
+      },
+      {
+        "name": "Lychee Services",
+        "rows": [
+          {
+            "charts": [
+              {
+                "name": "Lychee CPU Usage",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "ts(\"heapster.pod.cpu.request\", cluster=${cluster} and label.app=lychee)",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Units",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT"
+                },
+                "summarization": "MEAN"
+              },
+              {
+                "name": "Lychee Memory Usage",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "ts(\"heapster.pod.memory.usage\", cluster=${cluster} and label.app=lychee)",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Bytes",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": true,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "windowSize": 5,
+                  "showHosts": false,
+                  "showLabels": false,
+                  "showRawValues": false,
+                  "autoColumnTags": false,
+                  "tagMode": "custom",
+                  "numTags": 4,
+                  "customTags": [
+                    "pod_name",
+                    "pod_namespace",
+                    "nodename"
+                  ],
+                  "groupBySource": false,
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT"
+                },
+                "summarization": "LAST"
+              },
+              {
+                "name": "Lychee File System Usage",
+                "sources": [
+                  {
+                    "name": "Source",
+                    "query": "ts(\"heapster.pod.filesystem.usage\", cluster=${cluster} and label.app=lychee)",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Bytes",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": true,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "windowSize": 5,
+                  "showHosts": false,
+                  "showLabels": false,
+                  "showRawValues": false,
+                  "autoColumnTags": false,
+                  "tagMode": "custom",
+                  "numTags": 4,
+                  "customTags": [
+                    "pod_name",
+                    "pod_namespace",
+                    "nodename",
+                    "resource_id"
+                  ],
+                  "groupBySource": false,
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT"
+                },
+                "summarization": "LAST"
+              }
+            ],
+            "heightFactor": 100
+          }
+        ]
+      },
+      {
+        "name": "Frontend Services",
+        "rows": [
+          {
+            "charts": [
+              {
+                "name": "Lychee Chatter",
+                "sources": [
+                  {
+                    "name": "inbound",
+                    "query": "rate(ts(\"heapster.pod.network.rx\", cluster=${cluster} and label.app=lychee))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "outbound",
+                    "query": "rate(ts(\"heapster.pod.network.tx\", cluster=${cluster} and label.app=lychee))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Bytes",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT"
+                },
+                "summarization": "MEAN"
+              },
+              {
+                "name": "Lychee Entry Points",
+                "sources": [
+                  {
+                    "name": "New Query",
+                    "query": "count(ts(\"heapster.pod.memory.usage\", cluster=${cluster} and label.app=lychee and label.tier=frontend))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "",
+                "base": 1,
+                "noDefaultEvents": true,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "sparkline",
+                  "min": 0,
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "top",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "TOP",
+                  "fixedLegendDisplayStats": [],
+                  "fixedLegendFilterSort": "BOTTOM",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "COUNT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "100",
+                  "sparklineSize": "BOTTOM",
+                  "sparklineLineColor": "rgba(127,39,221,0.8)",
+                  "sparklineFillColor": "rgba(68,14,98,0.498039)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(56,160,244,1)",
+                    "rgba(255,224,61,0.498039)",
+                    "rgba(211,92,36,1)",
+                    "rgba(60,143,150,1)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    10,
+                    100,
+                    101
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MAX"
+              },
+              {
+                "name": "Web Requests",
+                "sources": [
+                  {
+                    "name": "requests",
+                    "query": "rate(ts(\"nginx.requests\", app=lychee and cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "reading",
+                    "query": "rate(ts(\"nginx.reading\", app=lychee and cluster=${cluster}))",
+                    "disabled": true,
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "writing",
+                    "query": "rate(ts(\"nginx.writing\", app=lychee and cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "waiting",
+                    "query": "rate(ts(\"nginx.waiting\", app=lychee and cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "mexp",
+                    "query": "mmedian(10m, ${requests})",
+                    "disabled": true,
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "alert",
+                    "query": "${mexp} / lag(10m, ${mexp}) < .9",
+                    "disabled": true,
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "mavg",
+                    "query": "mavg(1h, ${requests})",
+                    "disabled": true,
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Units",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT"
+                },
+                "summarization": "MEAN"
+              }
+            ],
+            "heightFactor": 100
+          }
+        ]
+      },
+      {
+        "name": "Backend Services",
+        "rows": [
+          {
+            "charts": [
+              {
+                "name": "CRUD Ops",
+                "sources": [
+                  {
+                    "name": "New Query",
+                    "query": "rate(ts(mysql.commands.select or mysql.commands.insert or mysql.commands.delete or mysql.commands.update, app=lychee and cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "100",
+                  "sparklineSize": "BACKGROUND",
+                  "sparklineFillColor": "rgba(134,192,66,0.498039)",
+                  "sparklineValueColorMapApplyTo": "TEXT",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MEAN"
+              },
+              {
+                "name": "Data service engines",
+                "sources": [
+                  {
+                    "name": "New Query",
+                    "query": "count(lag(30s,ts(\"heapster.pod.memory.usage\", cluster=${cluster} and label.app=lychee and label.tier=db)))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "",
+                "base": 1,
+                "noDefaultEvents": true,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "sparkline",
+                  "min": 0,
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "top",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT",
+                  "sparklineDisplayValueType": "VALUE",
+                  "sparklineDisplayColor": "rgba(255,255,255,1)",
+                  "sparklineDisplayHorizontalPosition": "MIDDLE",
+                  "sparklineDisplayFontSize": "100",
+                  "sparklineSize": "BOTTOM",
+                  "sparklineLineColor": "rgba(127,39,221,0.8)",
+                  "sparklineFillColor": "rgba(68,14,98,0.498039)",
+                  "sparklineValueColorMapColors": [
+                    "rgba(56,160,244,1)",
+                    "rgba(255,224,61,0.498039)",
+                    "rgba(211,92,36,1)",
+                    "rgba(60,143,150,1)"
+                  ],
+                  "sparklineValueColorMapValuesV2": [
+                    10,
+                    100,
+                    101
+                  ],
+                  "sparklineValueColorMapApplyTo": "BACKGROUND",
+                  "sparklineDecimalPrecision": 0
+                },
+                "summarization": "MAX"
+              },
+              {
+                "name": "Data Rates",
+                "sources": [
+                  {
+                    "name": "New Query",
+                    "query": "ts(mysql.bytes.sent, app=lychee and cluster=${cluster})",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "New Query",
+                    "query": "ts(mysql.commands.execute.sql, app=lychee and cluster=${cluster})",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "New Query",
+                    "query": "ts(mysql.bytes.received, app=lychee and cluster=${cluster})",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "New Query",
+                    "query": "ts(mysql.connections,app=lychee and cluster=${cluster})",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Units",
+                "base": 1,
+                "noDefaultEvents": false,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "stacked-area",
+                  "lineType": "linear",
+                  "stackType": "zero",
+                  "expectedDataSpacing": 300,
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "RIGHT",
+                  "fixedLegendDisplayStats": [
+                    "CURRENT"
+                  ],
+                  "fixedLegendFilterSort": "TOP",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "CURRENT"
+                },
+                "summarization": "MEAN"
+              }
+            ],
+            "heightFactor": 100
+          }
+        ]
+      },
+      {
+        "name": "Global",
+        "rows": [
+          {
+            "charts": [
+              {
+                "name": "Landscape",
+                "sources": [
+                  {
+                    "name": "K8s",
+                    "query": "normalize(ts(heapster.*, cluster=${cluster} and label.app=lychee))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "MySQL",
+                    "query": "normalize(ts(mysql.*, app=lychee and cluster=${cluster}))",
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  },
+                  {
+                    "name": "NGINX",
+                    "query": "normalize(ts(nginx.*, app=lychee and cluster=${cluster}))",
+                    "disabled": true,
+                    "scatterPlotSource": "Y",
+                    "querybuilderEnabled": false,
+                    "secondaryAxis": false,
+                    "sourceDescription": ""
+                  }
+                ],
+                "units": "Units",
+                "base": 1,
+                "noDefaultEvents": true,
+                "interpolatePoints": false,
+                "includeObsoleteMetrics": false,
+                "description": "",
+                "chartSettings": {
+                  "type": "line",
+                  "lineType": "linear",
+                  "windowing": "full",
+                  "autoColumnTags": false,
+                  "tagMode": "all",
+                  "numTags": 4,
+                  "customTags": [],
+                  "y1Units": "",
+                  "y0ScaleSIBy1024": false,
+                  "y1ScaleSIBy1024": false,
+                  "y0UnitAutoscaling": false,
+                  "y1UnitAutoscaling": false,
+                  "fixedLegendEnabled": false,
+                  "fixedLegendUseRawStats": false,
+                  "fixedLegendPosition": "TOP",
+                  "fixedLegendDisplayStats": [],
+                  "fixedLegendFilterSort": "BOTTOM",
+                  "fixedLegendFilterLimit": 5,
+                  "fixedLegendFilterField": "COUNT"
+                },
+                "summarization": "MEAN"
+              }
+            ],
+            "heightFactor": 100
+          }
+        ]
+      }
+    ],
+    "parameterDetails": {
+      "cluster": {
+        "hideFromView": false,
+        "description": null,
+        "allowAll": null,
+        "tagKey": null,
+        "queryValue": "ts(\"heapster.cluster.cpu.usage_rate\")",
+        "dynamicFieldType": "SOURCE",
+        "reverseDynSort": null,
+        "parameterType": "DYNAMIC",
+        "label": "Cluster",
+        "defaultValue": "defaultQuery",
+        "valuesToReadableStrings": {
+          "defaultQuery": "development"
+        },
+        "selectedLabel": "defaultQuery",
+        "value": "development"
+      }
+    }
+  }
+  

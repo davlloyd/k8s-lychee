@@ -53,6 +53,11 @@ RUN rm /etc/nginx/sites-enabled/default && \
     ln -s /etc/nginx/sites-available/lychee-webapp /etc/nginx/sites-enabled && \
     echo "daemon off;" >> /etc/nginx/nginx.conf
 
+#Activate SSL if certs present
+#COPY files/certs/lychee.* /etc/nginx/
+#COPY files/lychee-ssl-webapp /etc/nginx/sites-available
+#RUN ln -s /etc/nginx/sites-available/lychee-ssl-webapp /etc/nginx/sites-enabled
+
 # Configure PHP
 RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini && \
     sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.0/fpm/php.ini && \
