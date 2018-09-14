@@ -21,6 +21,7 @@ spec:
       - name: mysql
         image: pks-harbor.syddsc.local/library/mysql:latest
 #        image: mysql:latest
+#        args: ["--ignore-db-dir=lost+found", "--innodb-use-native-aio=0"]
         args: ["--ignore-db-dir=lost+found"]
         env:
         - name: MYSQL_DATABASE
