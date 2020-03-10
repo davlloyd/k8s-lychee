@@ -34,17 +34,20 @@ ENV DB_USER dbuser
 ENV DB_PASSWORD password
 ENV DB_PREFIX ""
 
-
 # Get the Core installed
+
+RUN apt-get update
+RUN apt-get install -yq language-pack-en-base software-properties-common
+RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
 RUN apt-get update
 
 # Lychee requires the following php extensions Installed (session, exif, mbstring, gd, mysqli, json, zip)
 # Where lychee defaults to consuming local mysql services no mysql server instance will be located in this image
-RUN apt-get -yq install git nginx imagemagick curl mysql-client vim nfs-common \
-                        php7.0-fpm php7.0-common php7.0-cli php7.0-mysqlnd \
-                        php7.0-mysqli php-curl php7.0-json php7.0-zip php7.0-exif \
-                        php7.0-mbstring php7.0-gd php7.0-exif php-pear php7.0-dev
-RUN pecl install mongodb
+RUN apt-get -yq install git nginx imagemagick curl mysql-client vim nfs-common 
+RUN apt-get -yq install php7.4-fpm php7.4-common php7.4-cli php7.4-mysqlnd 
+RUN apt-get -yq install php7.4-mysqli php-curl php7.4-json php7.4-zip php7.4-exif \
+                        php7.4-mbstring php7.4-gd php7.4-exif php-pear php7.4-dev
+#RUN pecl install mongodb
 
 # Activate app in NGINX
 COPY files/lychee-webapp /etc/nginx/sites-available
@@ -59,16 +62,16 @@ RUN rm /etc/nginx/sites-enabled/default && \
 #RUN ln -s /etc/nginx/sites-available/lychee-ssl-webapp /etc/nginx/sites-enabled
 
 # Configure PHP
-RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.0/fpm/php.ini && \
-    sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.0/fpm/php.ini && \
-    sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 1G/g" /etc/php/7.0/fpm/php.ini && \
-    sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 1G/g" /etc/php/7.0/fpm/php.ini && \
-    sed -i -e "s/;clear_env = no/clear_env = no/" /etc/php/7.0/fpm/pool.d/www.conf
+RUN sed -i -e "s/output_buffering\s*=\s*4096/output_buffering = Off/g" /etc/php/7.4/fpm/php.ini && \
+    sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.4/fpm/php.ini && \
+    sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 1G/g" /etc/php/7.4/fpm/php.ini && \
+    sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 1G/g" /etc/php/7.4/fpm/php.ini && \
+    sed -i -e "s/;clear_env = no/clear_env = no/" /etc/php/7.4/fpm/pool.d/www.conf
 
 # Get Lychee code
 RUN mkdir -p /usr/share/webapps && \
     cd /usr/share/webapps && \
-    git clone https://github.com/davlloyd/Lychee.git && \
+    git clone https://github.com/electerious/Lychee && \
     mv /usr/share/webapps/Lychee /usr/share/webapps/lychee
 
 # Set entry point

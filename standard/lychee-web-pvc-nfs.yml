@@ -7,8 +7,8 @@ metadata:
     tier: frontend
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
+  volumeMode: Filesystem
   resources:
     requests:
-      storage: 5Gi
-  storageClassName: wcp-storage-general
+      storage: 10Gi

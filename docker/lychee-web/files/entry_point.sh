@@ -48,11 +48,11 @@ done
     echo "?>" >> /config/lychee/config.php
 
 # Set variables for web application
-[ -e /etc/php/7.0/fpm/pool.d/www.conf ] && \
-    echo "env[DB_USER] = $DB_USER" >> /etc/php/7.0/fpm/pool.d/www.conf && \
-    echo "env[DB_PASSWORD] = $DB_PASSWORD" >> /etc/php/7.0/fpm/pool.d/www.conf && \
-    echo "env[DB_HOST] = $DB_HOST" >> /etc/php/7.0/fpm/pool.d/www.conf && \
-    echo "env[DB_NAME] = $DB_NAME" >> /etc/php/7.0/fpm/pool.d/www.conf
+[ -e /etc/php/7.4/fpm/pool.d/www.conf ] && \
+    echo "env[DB_USER] = $DB_USER" >> /etc/php/7.4/fpm/pool.d/www.conf && \
+    echo "env[DB_PASSWORD] = $DB_PASSWORD" >> /etc/php/7.4/fpm/pool.d/www.conf && \
+    echo "env[DB_HOST] = $DB_HOST" >> /etc/php/7.4/fpm/pool.d/www.conf && \
+    echo "env[DB_NAME] = $DB_NAME" >> /etc/php/7.4/fpm/pool.d/www.conf
 
 
 # permissions
@@ -65,7 +65,7 @@ chown -R root:root \
 chmod -R 777 /config /photos
 
 # Get PHP started as installs stopped
-service php7.0-fpm start
+service php7.4-fpm start
 
 # Get nginx service started as installs stopped
 service nginx start

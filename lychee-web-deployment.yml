@@ -6,7 +6,7 @@ metadata:
     app: lychee
     tier: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: lychee
@@ -20,12 +20,11 @@ spec:
     spec:
       containers:
       - name: lychee
-        image: pks-harbor.syddsc.local/library/lychee-web:latest
-#        - image: davlloyd/lychee-web:latest
+        image: davlloyd/lychee-web:latest
         imagePullPolicy: Always
         env:
         - name: DB_HOST
-          value: lychee-mysql-service
+          value: lychee-mysql
         - name: DB_NAME
           valueFrom:
             configMapKeyRef:
@@ -61,3 +60,29 @@ spec:
         configMap:
           name: lychee-config
 
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: lychee-web-service
+  labels:
+    app: lychee
+    tier: frontend
+spec:
+  externalTrafficPolicy: Cluster
+  selector:
+    app: lychee
+    tier: frontend
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  #sessionAffinity: None
+  sessionAffinity: ClientIP
+  type: LoadBalancer

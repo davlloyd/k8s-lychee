@@ -1,0 +1,7 @@
+{
+ "name": "lb-medium",
+ "description": "Medium config LB Network profile",
+ "parameters": { 
+    "lb_size": "medium" 
+    }
+}

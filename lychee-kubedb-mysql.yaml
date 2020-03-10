@@ -1,0 +1,42 @@
+apiVersion: kubedb.com/v1alpha1
+kind: MySQL
+metadata:
+  name: lychee-mysql
+  namespace: default
+  labels:
+    app: lychee
+    tier: db
+spec:
+  version: "8.0-v2"
+  databaseSecret:
+    secretName: lychee-secret
+  storageType: "Durable"
+  storage:
+    storageClassName: "wcp-storage-general"
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+  monitor:
+    agent: prometheus.io/coreos-operator
+    prometheus:
+      namespace: monitoring
+      labels:
+        app: lychee
+      interval: 10s
+#  podTemplate:
+#    spec:
+#      resources:
+#        requests:
+#          memory: "64Mi"
+#          cpu: "250m"
+#        limits:
+#          memory: "128Mi"
+#          cpu: "500m"
+  serviceTemplate:
+    spec:
+      type: LoadBalancer
+  terminationPolicy: Terminate
+  updateStrategy:
+    type: RollingUpdate

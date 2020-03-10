@@ -1,0 +1,7 @@
+{
+ "name": "lb-small",
+ "description": "Small config LB Network profile",
+ "parameters": { 
+    "lb_size": "small" 
+    }
+}

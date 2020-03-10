@@ -8,7 +8,7 @@ metadata:
     tier: frontend
 spec:
   # number of instances required
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: lychee
@@ -68,7 +68,7 @@ spec:
         env:
         # Cluster name is optional butneeded for centralised proxy
         - name: CLUSTER_NAME
-          value: production
+          value: lychee
         # Services to be monitored
         - name: SERVICES
           value: nginx
