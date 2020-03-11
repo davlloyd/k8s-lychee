@@ -2,7 +2,6 @@ apiVersion: gcm.vmware.com/v1alpha1
 kind: ManagedCluster
 metadata:
   name: lychee1
-  namespace: lychee
 spec:
   topology:
     controlPlane:
