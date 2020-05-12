@@ -1,7 +1,7 @@
-apiVersion: gcm.vmware.com/v1alpha1
-kind: ManagedCluster
+apiVersion: run.tanzu.vmware.com/v1alpha1
+kind: TanzuKubernetesCluster
 metadata:
-  name: lychee1
+  name: lychee
 spec:
   topology:
     controlPlane:

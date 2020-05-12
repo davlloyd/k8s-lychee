@@ -16,8 +16,8 @@ spec:
   - nolock
   - nfsvers=4.1
   nfs:
-    server: 192.168.187.250
-    path: "/lychee/lab17"
+    server: 192.168.185.30
+    path: "/vsan-fs/lychee"
     readOnly: false 
 
 

@@ -1,19 +1,4 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: lychee-pvc-photo
-  labels:
-    app: lychee
-    tier: frontend
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: wcp-storage-general
 
----
 
 apiVersion: apps/v1
 kind: Deployment
